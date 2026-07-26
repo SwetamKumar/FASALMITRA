@@ -1,0 +1,32 @@
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Spring Boot local config
+application-local.properties
+application-local.yml
+
+# IDE
+.metadata/
+.idea/
+.vscode/
+.project
+.classpath
+.settings/
+
+# Java
+target/
+*.class
+
+# Node
+node_modules/
+dist/
+build/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
