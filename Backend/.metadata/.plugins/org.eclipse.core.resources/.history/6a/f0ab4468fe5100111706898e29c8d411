@@ -1,0 +1,5 @@
+package com.fasalmitra.config;
+
+public class UserDetailsServiceImpl {
+
+}

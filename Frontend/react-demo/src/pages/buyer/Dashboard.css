@@ -1,0 +1,110 @@
+.dash-tabs {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border);
+  padding-bottom: 0;
+}
+
+.dash-tab {
+  padding: 0.6rem 1.2rem;
+  border: none;
+  background: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-mid);
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s;
+}
+.dash-tab.active {
+  color: var(--green-primary);
+  border-bottom-color: var(--green-primary);
+  font-weight: 600;
+}
+.dash-tab:hover { color: var(--green-primary); }
+
+/* Stats row */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  text-align: center;
+  padding: 1.2rem;
+}
+.stat-val {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--green-primary);
+  font-family: 'Poppins', sans-serif;
+}
+.stat-label {
+  font-size: 0.8rem;
+  color: var(--text-light);
+  margin-top: 0.2rem;
+}
+
+/* Orders list */
+.orders-list { display: flex; flex-direction: column; gap: 1rem; }
+
+.order-card { padding: 1.2rem; }
+.order-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+.order-price {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--green-primary);
+  margin-bottom: 0.3rem;
+}
+
+.text-muted {
+  font-size: 0.82rem;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+
+/* Product table */
+.product-table { overflow-x: auto; padding: 0; }
+.product-table table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+.product-table th {
+  background: var(--green-pale);
+  color: var(--green-primary);
+  font-weight: 600;
+  padding: 0.8rem 1rem;
+  text-align: left;
+}
+.product-table td {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--border);
+  vertical-align: middle;
+}
+.product-table tr:last-child td { border-bottom: none; }
+
+/* Product form */
+.product-form {
+  margin-bottom: 1.5rem;
+}
+.three-col {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 3rem;
+  color: var(--text-light);
+  background: white;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}

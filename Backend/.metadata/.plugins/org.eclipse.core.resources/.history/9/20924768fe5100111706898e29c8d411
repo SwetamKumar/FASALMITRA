@@ -1,0 +1,23 @@
+package com.fasalmitra.controller;
+
+import com.fasalmitra.dto.response.ApiResponse;
+
+
+import com.fasalmitra.service.WeatherService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+@RestController
+@RequestMapping("/api/weather")
+@RequiredArgsConstructor
+public class WeatherController {
+
+	private final WeatherService weatherService;
+
+    @GetMapping
+    public ResponseEntity<ApiResponse<String>> getWeather(
+            @RequestParam String district,
+            @RequestParam String state) {
+        return ResponseEntity.ok(ApiResponse.success(weatherService.getWeather(district, state)));
+    }
+}

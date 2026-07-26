@@ -1,0 +1,58 @@
+package com.fasalmitra.dto.request;
+
+import com.fasalmitra.entity.OrderStatus;
+
+import jakarta.validation.constraints.*;
+import lombok.Data;
+
+public class OrderRequest {
+
+    @Data
+    public static class PlaceOrder {
+        @NotNull
+        private Long productId;
+
+        @NotNull
+        @Min(value = 1)
+        private Double quantity;
+
+        @NotBlank
+        private String deliveryAddress;
+
+		public Long getProductId() {
+			// TODO Auto-generated method stub
+			return productId;
+		}
+
+		public double getQuantity() {
+			// TODO Auto-generated method stub
+			return (double) quantity;
+		}
+
+		public Object getDeliveryAddress() {
+			// TODO Auto-generated method stub
+			return deliveryAddress;
+		}
+    }
+
+    @Data
+    public static class UpdateStatus {
+        @NotNull
+        private OrderStatus status;
+
+        private String cancelReason;
+
+		public String getCancelReason() {
+			return cancelReason;
+		}
+
+		public void setCancelReason(String cancelReason) {
+			this.cancelReason = cancelReason;
+		}
+
+		public OrderStatus getStatus() {
+			// TODO Auto-generated method stub
+			return status;
+		}
+    }
+}

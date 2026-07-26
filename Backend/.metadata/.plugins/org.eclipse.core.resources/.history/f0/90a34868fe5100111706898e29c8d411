@@ -1,0 +1,24 @@
+package com.fasalmitra.dto.request;
+
+import jakarta.validation.constraints.*;
+
+import lombok.Data;
+import lombok.*;
+@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ReviewRequest {
+
+    @NotNull
+    private Long productId;
+
+    @NotNull
+    @Min(1) @Max(5)
+    private Integer rating;
+
+    @Size(max = 500)
+    private String comment;
+}

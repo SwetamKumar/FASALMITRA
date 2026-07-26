@@ -1,0 +1,9 @@
+package com.fasalmitra.entity;
+import lombok.*;
+public enum OrderStatus {
+    PLACED,
+    CONFIRMED,
+    SHIPPED,
+    DELIVERED,
+    CANCELLED
+}

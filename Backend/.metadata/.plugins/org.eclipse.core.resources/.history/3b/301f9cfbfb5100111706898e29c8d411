@@ -1,0 +1,106 @@
+package com.fasalmitra.dto.request;
+
+import com.fasalmitra.entity.Role;
+
+import jakarta.validation.constraints.*;
+import lombok.Data;
+import lombok.*;
+public class AuthRequest {
+
+    @Data
+    public static class Register {
+        @NotBlank(message = "Name is required")
+        private String name;
+
+        @Email(message = "Valid email is required")
+        @NotBlank
+        private String email;
+
+        @Size(min = 6, message = "Password must be at least 6 characters")
+        private String password;
+
+        @NotBlank(message = "Phone is required")
+        private String phone;
+
+        private String state;
+        private String district;
+        private String village;
+
+        @NotNull(message = "Role is required")
+        private Role role;
+
+		public String getState() {
+			return state;
+		}
+
+		public void setState(String state) {
+			this.state = state;
+		}
+
+		public String getDistrict() {
+			return district;
+		}
+
+		public void setDistrict(String district) {
+			this.district = district;
+		}
+
+		public String getVillage() {
+			return village;
+		}
+
+		public void setVillage(String village) {
+			this.village = village;
+		}
+
+		public String getEmail() {
+			// TODO Auto-generated method stub
+			return email;
+		}
+
+		public Object getName() {
+			// TODO Auto-generated method stub
+			return name;
+		}
+
+		public CharSequence getPassword() {
+			// TODO Auto-generated method stub
+			return password;
+		}
+
+		public Object getPhone() {
+			// TODO Auto-generated method stub
+			return phone;
+		}
+
+		public Object getRole() {
+			// TODO Auto-generated method stub
+			return role;
+		}
+
+		public String getEmail1() {
+			// TODO Auto-generated method stub
+			return email;
+		}
+    }
+
+    @Data
+    public static class Login {
+        @Email
+        @NotBlank
+        private String email;
+
+        @NotBlank
+        private String password;
+
+		public Object getPassword() {
+			// TODO Auto-generated method stub
+			return password;
+		}
+
+		public Object getEmail() {
+			// TODO Auto-generated method stub
+			return email;
+		}
+    }
+}

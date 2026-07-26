@@ -1,0 +1,48 @@
+package com.fasalmitra.controller;
+
+import com.fasalmitra.dto.request.OrderRequest;
+import com.fasalmitra.dto.response.ApiResponse;
+import com.fasalmitra.dto.response.OrderResponse;
+import com.fasalmitra.service.OrderService;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import lombok.*;
+@RestController
+@RequestMapping("/api/orders")
+@RequiredArgsConstructor
+public class OrderController {
+
+    private final OrderService orderService = new OrderService();
+
+    @PostMapping("/buyer/place")
+    @PreAuthorize("hasRole('ROLE_BUYER')")
+    public ResponseEntity<ApiResponse<OrderResponse>> placeOrder(
+            @Valid @RequestBody OrderRequest.PlaceOrder request) {
+        return ResponseEntity.ok(ApiResponse.success("Order placed", orderService.placeOrder(request)));
+    }
+
+    @GetMapping("/buyer/my-orders")
+    @PreAuthorize("hasRole('ROLE_BUYER')")
+    public ResponseEntity<ApiResponse<List<OrderResponse>>> getMyOrdersAsBuyer() {
+        return ResponseEntity.ok(ApiResponse.success(orderService.getMyOrdersAsBuyer()));
+    }
+
+    @GetMapping("/farmer/incoming")
+    @PreAuthorize("hasRole('ROLE_FARMER')")
+    public ResponseEntity<ApiResponse<List<OrderResponse>>> getOrdersForMyProducts() {
+        return ResponseEntity.ok(ApiResponse.success(orderService.getOrdersForMyProducts()));
+    }
+
+    @PatchMapping("/{orderId}/status")
+    @PreAuthorize("hasAnyRole('ROLE_FARMER', 'ROLE_BUYER')")
+    public ResponseEntity<ApiResponse<OrderResponse>> updateStatus(
+            @PathVariable Long orderId,
+            @Valid @RequestBody OrderRequest.UpdateStatus request) {
+        return ResponseEntity.ok(ApiResponse.success("Status updated", orderService.updateOrderStatus(orderId, request)));
+    }
+}

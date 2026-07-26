@@ -1,0 +1,98 @@
+.detail-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .detail-grid { grid-template-columns: 1fr; }
+}
+
+.detail-img {
+  border-radius: 12px;
+  overflow: hidden;
+  height: 280px;
+  background: var(--green-pale);
+  margin-bottom: 1rem;
+}
+.detail-img img { width: 100%; height: 100%; object-fit: cover; }
+.img-placeholder-lg {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 5rem;
+}
+
+.detail-info { padding: 1.2rem; }
+
+.info-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-mid);
+}
+
+.price-big {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--green-primary);
+  margin: 1rem 0;
+  font-family: 'Poppins', sans-serif;
+}
+.price-big span { font-size: 1rem; font-weight: 400; color: var(--text-light); }
+
+.weather-widget {
+  background: linear-gradient(135deg, #e0f2fe, #f0fdf4);
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  margin-top: 1rem;
+  font-size: 0.85rem;
+}
+.weather-details {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 0.4rem;
+  color: var(--text-mid);
+}
+
+.order-total {
+  font-size: 1rem;
+  color: var(--text-mid);
+  margin-bottom: 0.75rem;
+}
+.order-total strong {
+  color: var(--green-primary);
+  font-size: 1.2rem;
+}
+
+/* Star selector */
+.star-select { display: flex; gap: 0.3rem; }
+.star-btn {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #d1d5db;
+  transition: color 0.15s;
+  padding: 0;
+}
+.star-btn.active { color: var(--amber); }
+.star-btn:hover { color: var(--amber); }
+
+/* Review items */
+.review-item {
+  padding: 0.8rem 0;
+  border-bottom: 1px solid var(--border);
+}
+.review-item:last-child { border-bottom: none; }
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.3rem;
+}
+.review-header .stars { color: var(--amber); }

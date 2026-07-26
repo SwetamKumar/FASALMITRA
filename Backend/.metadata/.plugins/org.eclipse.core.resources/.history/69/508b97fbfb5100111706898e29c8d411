@@ -1,0 +1,12 @@
+package com.fasalmitra.exception;
+import lombok.*;
+public class BadRequestException extends RuntimeException {
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 6205419349759972963L;
+
+	public BadRequestException(String message) {
+        super(message);
+    }
+}

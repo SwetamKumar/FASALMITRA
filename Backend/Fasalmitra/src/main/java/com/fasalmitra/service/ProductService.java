@@ -1,0 +1,120 @@
+package com.fasalmitra.service;
+
+import com.fasalmitra.dto.request.ProductRequest;
+import com.fasalmitra.dto.response.ProductResponse;
+import com.fasalmitra.entity.Product;
+import com.fasalmitra.entity.User;
+import com.fasalmitra.exception.BadRequestException;
+import com.fasalmitra.exception.ResourceNotFoundException;
+import com.fasalmitra.repository.ProductRepository;
+import com.fasalmitra.repository.ReviewRepository;
+import com.fasalmitra.repository.UserRepository;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.stream.Collectors;
+
+@Service
+public class ProductService {
+
+    private final ProductRepository productRepository;
+    private final ReviewRepository reviewRepository;
+    private final UserRepository userRepository;
+
+    public ProductService(ProductRepository productRepository,
+                          ReviewRepository reviewRepository,
+                          UserRepository userRepository) {
+        this.productRepository = productRepository;
+        this.reviewRepository  = reviewRepository;
+        this.userRepository    = userRepository;
+    }
+
+    public ProductResponse addProduct(ProductRequest request) {
+        User farmer = getCurrentUser();
+        Product product = Product.builder()
+                .name(request.getName())
+                .description(request.getDescription())
+                .pricePerUnit(request.getPricePerUnit())
+                .unit(request.getUnit())
+                .quantityAvailable(request.getQuantityAvailable())
+                .category(request.getCategory())
+                .imageUrl(request.getImageUrl())
+                .farmer(farmer)
+                .available(true)
+                .build();
+        return toResponse(productRepository.save(product));
+    }
+
+    public ProductResponse updateProduct(Long id, ProductRequest request) {
+        User farmer = getCurrentUser();
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+        if (!product.getFarmer().getId().equals(farmer.getId())) {
+            throw new BadRequestException("You can only update your own products");
+        }
+        product.setName(request.getName());
+        product.setDescription(request.getDescription());
+        product.setPricePerUnit(request.getPricePerUnit());
+        product.setUnit(request.getUnit());
+        product.setQuantityAvailable(request.getQuantityAvailable());
+        product.setCategory(request.getCategory());
+        product.setImageUrl(request.getImageUrl());
+        return toResponse(productRepository.save(product));
+    }
+
+    public void deleteProduct(Long id) {
+        User farmer = getCurrentUser();
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+        if (!product.getFarmer().getId().equals(farmer.getId())) {
+            throw new BadRequestException("You can only delete your own products");
+        }
+        productRepository.delete(product);
+    }
+
+    public List<ProductResponse> getMyProducts() {
+        User farmer = getCurrentUser();
+        return productRepository.findByFarmerId(farmer.getId())
+                .stream().map(this::toResponse).collect(Collectors.toList());
+    }
+
+    public List<ProductResponse> filterProducts(String category, BigDecimal minPrice,
+                                                BigDecimal maxPrice, String search) {
+        return productRepository.filterProducts(category, minPrice, maxPrice, search)
+                .stream().map(this::toResponse).collect(Collectors.toList());
+    }
+
+    public ProductResponse getProductById(Long id) {
+        return toResponse(productRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found")));
+    }
+
+    private ProductResponse toResponse(Product p) {
+        Double avgRating = reviewRepository.findAverageRatingByProductId(p.getId());
+        return ProductResponse.builder()
+                .id(p.getId())
+                .name(p.getName())
+                .description(p.getDescription())
+                .pricePerUnit(p.getPricePerUnit())
+                .unit(p.getUnit())
+                .quantityAvailable(p.getQuantityAvailable())
+                .category(p.getCategory())
+                .imageUrl(p.getImageUrl())
+                .available(p.isAvailable())
+                .farmerId(p.getFarmer().getId())
+                .farmerName(p.getFarmer().getName())
+                .farmerDistrict(p.getFarmer().getDistrict())
+                .farmerState(p.getFarmer().getState())
+                .averageRating(avgRating)
+                .createdAt(p.getCreatedAt())
+                .build();
+    }
+
+    private User getCurrentUser() {
+        String email = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByEmail(email)
+                .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+    }
+}

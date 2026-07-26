@@ -1,0 +1,26 @@
+package com.fasalmitra.dto.response;
+
+import com.fasalmitra.entity.OrderStatus;
+import lombok.Builder;
+import lombok.Data;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+@Data
+@Builder
+public class OrderResponse {
+    private Long id;
+    private Long buyerId;
+    private String buyerName;
+    private Long productId;
+    private String productName;
+    private String farmerName;
+    private Double quantity;
+    private String unit;
+    private BigDecimal totalPrice;
+    private OrderStatus status;
+    private String deliveryAddress;
+    private String cancelReason;
+    private LocalDateTime orderedAt;
+    private LocalDateTime updatedAt;
+}

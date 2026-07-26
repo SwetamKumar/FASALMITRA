@@ -1,0 +1,34 @@
+package com.fasalmitra.controller;
+
+import com.fasalmitra.dto.request.AuthRequest;
+import com.fasalmitra.dto.response.ApiResponse;
+import com.fasalmitra.dto.response.AuthResponse;
+import com.fasalmitra.service.AuthService;
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/api/auth")
+public class AuthController {
+
+    private final AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
+    @PostMapping("/register")
+    public ResponseEntity<ApiResponse<AuthResponse>> register(
+            @Valid @RequestBody AuthRequest.Register request) {
+        return ResponseEntity.ok(
+            ApiResponse.success("Registered successfully", authService.register(request)));
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<ApiResponse<AuthResponse>> login(
+            @Valid @RequestBody AuthRequest.Login request) {
+        return ResponseEntity.ok(
+            ApiResponse.success("Login successful", authService.login(request)));
+    }
+}

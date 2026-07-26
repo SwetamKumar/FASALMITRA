@@ -1,0 +1,60 @@
+package com.fasalmitra.dto.request;
+
+import jakarta.validation.constraints.*;
+import lombok.*;
+import lombok.Data;
+
+import java.math.BigDecimal;
+
+@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class ProductRequest {
+
+    @NotBlank(message = "Product name is required")
+    private String name;
+
+    private String description;
+
+    @NotNull(message = "Price is required")
+    @DecimalMin(value = "0.01", message = "Price must be greater than 0")
+    private BigDecimal pricePerUnit;
+
+    @NotBlank(message = "Unit is required")
+    private String unit;
+
+    @NotNull(message = "Quantity is required")
+    @Min(value = 0, message = "Quantity cannot be negative")
+    private Double quantityAvailable;
+
+    private String category;
+
+    private String imageUrl;
+
+	public String getCategory() {
+		return category;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
+	}
+}

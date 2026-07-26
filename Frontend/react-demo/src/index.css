@@ -1,0 +1,122 @@
+:root {
+  --green-primary: #2d7a3a;
+  --green-light: #4caf50;
+  --green-pale: #e8f5e9;
+  --amber: #f59e0b;
+  --amber-pale: #fffbeb;
+  --red: #ef4444;
+  --text-dark: #1a2e1a;
+  --text-mid: #4a5568;
+  --text-light: #718096;
+  --bg: #f7faf7;
+  --white: #ffffff;
+  --border: #e2e8f0;
+  --shadow: 0 2px 8px rgba(0,0,0,0.08);
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+h1, h2, h3, h4 { font-family: 'Poppins', sans-serif; }
+
+a { text-decoration: none; color: inherit; }
+
+button { cursor: pointer; font-family: inherit; }
+
+input, select, textarea {
+  font-family: inherit;
+  outline: none;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* ── Buttons ────────────────────────────── */
+.btn {
+  padding: 0.6rem 1.4rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.btn-primary {
+  background: var(--green-primary);
+  color: white;
+}
+.btn-primary:hover { background: #245f2d; }
+.btn-secondary {
+  background: var(--green-pale);
+  color: var(--green-primary);
+}
+.btn-danger {
+  background: #fee2e2;
+  color: var(--red);
+}
+.btn-amber {
+  background: var(--amber-pale);
+  color: #92400e;
+}
+
+/* ── Cards ─────────────────────────────── */
+.card {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.5rem;
+}
+
+/* ── Badge ─────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.7rem;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+.badge-placed    { background: #dbeafe; color: #1e40af; }
+.badge-confirmed { background: #fef3c7; color: #92400e; }
+.badge-shipped   { background: #e0e7ff; color: #3730a3; }
+.badge-delivered { background: var(--green-pale); color: var(--green-primary); }
+.badge-cancelled { background: #fee2e2; color: var(--red); }
+
+/* ── Form ─────────────────────────────── */
+.form-group { margin-bottom: 1rem; }
+.form-group label {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin-bottom: 0.4rem;
+  color: var(--text-mid);
+}
+.form-control {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  font-size: 0.9rem;
+  transition: border-color 0.2s;
+}
+.form-control:focus { border-color: var(--green-primary); }
+
+/* ── Stars ─────────────────────────────── */
+.stars { color: var(--amber); font-size: 0.9rem; }
+
+/* ── Page header ────────────────────────── */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+}
+.page-header h2 { font-size: 1.4rem; }

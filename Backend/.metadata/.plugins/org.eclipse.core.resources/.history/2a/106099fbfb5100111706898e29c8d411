@@ -1,0 +1,7 @@
+package com.fasalmitra.entity;
+import lombok.*;
+public enum Role {
+    ROLE_FARMER,
+    ROLE_BUYER,
+    ROLE_ADMIN
+}

@@ -1,0 +1,26 @@
+package com.fasalmitra.dto.response;
+
+import lombok.Builder;
+import lombok.Data;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+
+@Data
+@Builder
+public class ProductResponse {
+    private Long id;
+    private String name;
+    private String description;
+    private BigDecimal pricePerUnit;
+    private String unit;
+    private Double quantityAvailable;
+    private String category;
+    private String imageUrl;
+    private boolean available;
+    private Long farmerId;
+    private String farmerName;
+    private String farmerDistrict;
+    private String farmerState;
+    private Double averageRating;
+    private LocalDateTime createdAt;
+}
